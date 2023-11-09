@@ -1,3 +1,13 @@
+/*
+Jag upptäckte att det var samma värde (num = 10) på alla klädda kort, så ni kanske vill ändra det.
+Här kommer lite ideer om vad ni kan göra på del 6 i uppgiften:
+Vända tillbaka korten som inte matchar.
+Ha två spelare och räkna poäng och hålla reda på vems tur det är.
+Fixa så att det blir två av varje kort (samma bild) i cards-arrayen så att man måste ha exakt match av kort stället för att matcha på värde
+Start-knapp som slumpar om ordningen på korten
+Obs! Denna del är överkurs. Men gör gärna ett försök och hjälp varandra
+*/
+
 import { cards } from "./cards.js";
 const gameEl = document.getElementById("game");
 let lastCard;
