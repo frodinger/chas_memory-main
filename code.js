@@ -28,21 +28,21 @@ om card.showing är true använd `images/${card.file}` annars använd "images/ba
 function createCard(card, index) {
     let imgEl = document.createElement("img");
     
-    if (card.showing == true) {
-        imgEl.setAttribute(`src`, `images/${card.file}`);
-    } else if (card.showing == false) {
+    if (card.showing == false) {
         imgEl.setAttribute("src", "images/backside.png");
+    } else if (card.showing == true) {
+        imgEl.setAttribute(`src`, `images/${card.file}`);
     }
     
     imgEl.addEventListener("click", (e) => {
         const element = e.target;
         
-        if (element.showing == false) {
-            element.showing = true;
-            console.log("element.showing: " + element.showing + " it should be true");
-        } else if (element.showing == true) { 
+        if (element.showing == true) {
             element.showing = false;
-            console.log("element.showing: ", element.showing);
+            imgEl.setAttribute("src", "images/backside.png");
+        } else { 
+            element.showing = true;
+            imgEl.setAttribute(`src`, `images/${card.file}`);
         }
     });
     
