@@ -1,12 +1,3 @@
-/*
-Jag upptäckte att det var samma värde (num = 10) på alla klädda kort, så ni kanske vill ändra det.
-Här kommer lite ideer om vad ni kan göra på del 6 i uppgiften:
-Vända tillbaka korten som inte matchar.
-Ha två spelare och räkna poäng och hålla reda på vems tur det är.
-Fixa så att det blir två av varje kort (samma bild) i cards-arrayen så att man måste ha exakt match av kort stället för att matcha på värde
-Start-knapp som slumpar om ordningen på korten
-Obs! Denna del är överkurs. Men gör gärna ett försök och hjälp varandra
-*/
 
 import { cards } from "./cards.js";
 const gameEl = document.getElementById("game");
@@ -25,29 +16,17 @@ cards.forEach((card) => {
 /* 
 2. Skapa en funktion createCard. Som tar ett card-objekt och ett index som input och skapar
 ett img element och lägger till det på sidan i gameEl. Gör så här:
-    - skapa ett ett img-element med document.createElement("img")
-    - sätt attribut med setAttribute på img-elementet ange tex:
-    imgElement.setAttrubut("src", "images/backside.png") för baksidan på kortet.
-    om card.showing är true använd `images/${card.file}` annars använd "images/backside.png"
-    - lägg till width och height till imgElementet width ska vara 100 och height ska vara 145
-    - lägg till id = index på card elementet så att du kommer åt det senare
-    - använd appendChild för att lägga till kortet till gameEl
+- skapa ett ett img-element med document.createElement("img")
+- sätt attribut med setAttribute på img-elementet ange tex:
+imgElement.setAttrubut("src", "images/backside.png") för baksidan på kortet.
+om card.showing är true använd `images/${card.file}` annars använd "images/backside.png"
+- lägg till width och height till imgElementet width ska vara 100 och height ska vara 145
+- lägg till id = index på card elementet så att du kommer åt det senare
+- använd appendChild för att lägga till kortet till gameEl
 */ 
 
 function createCard(card, index) {
     let imgEl = document.createElement("img");
-
-    card["id"] = index;
-    
-    imgEl.addEventListener("click", (e) => {
-        const element = e.target;
-        
-        if (element.showing == false) {
-            element.showing = true;
-        } else {
-            element.showing = false;
-        }
-    });
     
     if (card.showing == true) {
         imgEl.setAttribute(`src`, `images/${card.file}`);
@@ -55,10 +34,27 @@ function createCard(card, index) {
         imgEl.setAttribute("src", "images/backside.png");
     }
     
+    imgEl.addEventListener("click", (e) => {
+        const element = e.target;
+        
+        if (element.showing == false) {
+            element.showing = true;
+            console.log("element.showing: " + element.showing + " it should be true");
+        } else if (element.showing == true) { 
+            element.showing = false;
+            console.log("element.showing: ", element.showing);
+        }
+    });
+    
+    card["id"] = index;
+    
     imgEl.setAttribute("height", "145");
     imgEl.setAttribute("width", "100");
     
     gameEl.appendChild(imgEl);
+    
+    //console.log(card);
+    //console.log(imgEl);
 }
 
 /*
@@ -83,3 +79,12 @@ kolla när man klickar på ett kort om det har samma värde som lastCard (card.n
 */
 
 // 6 (Ganska svårt) Få ihop hela spelet med det du skrivit ovan.
+
+/*
+Här kommer lite ideer om vad ni kan göra på del 6 i uppgiften:
+Vända tillbaka korten som inte matchar.
+Ha två spelare och räkna poäng och hålla reda på vems tur det är.
+Fixa så att det blir två av varje kort (samma bild) i cards-arrayen så att man måste ha exakt match av kort stället för att matcha på värde
+Start-knapp som slumpar om ordningen på korten
+Obs! Denna del är överkurs. Men gör gärna ett försök och hjälp varandra
+*/
