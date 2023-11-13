@@ -18,7 +18,9 @@ let lastCardEl;
 showing: false till varje kort för att hålla reda på om kortet visas eller inte.
 */
 
-
+cards.forEach((card) => {
+    card["showing"] = false;
+});
 
 /* 
 2. Skapa en funktion createCard. Som tar ett card-objekt och ett index som input och skapar
@@ -32,12 +34,43 @@ ett img element och lägger till det på sidan i gameEl. Gör så här:
     - använd appendChild för att lägga till kortet till gameEl
 */ 
 
+function createCard(card, index) {
+    let imgEl = document.createElement("img");
+
+    card["id"] = index;
+    
+    imgEl.addEventListener("click", (e) => {
+        const element = e.target;
+        
+        if (element.showing == false) {
+            element.showing = true;
+        } else {
+            element.showing = false;
+        }
+    });
+    
+    if (card.showing == true) {
+        imgEl.setAttribute(`src`, `images/${card.file}`);
+    } else if (card.showing == false) {
+        imgEl.setAttribute("src", "images/backside.png");
+    }
+    
+    imgEl.setAttribute("height", "145");
+    imgEl.setAttribute("width", "100");
+    
+    gameEl.appendChild(imgEl);
+}
+
 /*
 3. Använd for-loop eller forEach för att loopa igenom alla cards och anropa funktionen
 createCard med varje kort och varje index (i). Nu ska alla kort synas på sidan.
 Om du använder forEach måste du lägga till i som andra paremeter i arrow-function.
 Då räknar i:et från 0 och uppåt
 */    
+
+for (let i = 0; i < cards.length; i++) {
+    createCard(cards[i], i);
+}
 
 /*
 4. Lägg till addEventListner på korten i funktionen createCard. När man klickar ska
